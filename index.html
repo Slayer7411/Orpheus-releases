@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORPHEUS-741</title>
+<meta name="description" content="ORPHEUS-741: a player for listening. local files and streaming in one ui.">
+<link rel="icon" href="data:,">
+<style>
+@font-face { font-family:"Cinzel"; src:url("assets/fonts/Cinzel.ttf") format("truetype"); font-weight:400 900; font-display:swap }
+@font-face { font-family:"IBM Plex Mono"; src:url("assets/fonts/IBMPlexMono-Regular.ttf") format("truetype"); font-weight:400; font-display:swap }
+@font-face { font-family:"IBM Plex Mono"; src:url("assets/fonts/IBMPlexMono-SemiBold.ttf") format("truetype"); font-weight:600; font-display:swap }
+:root {
+  --void:#040303; --chitin:#0d0a0a; --bone:#e6e1da; --mute:#9b8f86; --low:#6f645c;
+  --red:#d21f26; --hair:#2a1113; --ash:#1c1617;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace; --serif:"Cinzel", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--void); color:var(--bone); font:14px/1.65 var(--mono) }
+a { color:var(--bone); text-decoration-color:var(--red); text-underline-offset:3px; overflow-wrap:anywhere }
+a:hover { color:var(--red) }
+code, pre { font:inherit; font-size:13px }
+pre { background:var(--chitin); border:1px solid var(--hair); padding:12px 14px; margin:8px 0 14px; overflow-x:auto; color:var(--bone) }
+code { color:var(--bone) }
+p, li { max-width:72ch; color:#cfc8bf }
+p { margin:0 0 10px }
+ul { margin:0 0 12px; padding-left:20px }
+li { margin:4px 0 }
+li::marker { color:var(--red) }
+
+main { max-width:760px; margin:0 auto; padding:24px max(18px, env(safe-area-inset-right, 0px)) 72px max(18px, env(safe-area-inset-left, 0px)) }
+.banner { margin:0 0 6px }
+.banner img { display:block; width:100%; height:auto; border:1px solid var(--hair) }
+.tagline { margin:14px 0 0; font-size:15px; color:var(--bone) }
+
+section { padding:26px 0; border-top:1px solid var(--ash) }
+h2 { font:600 18px/1.2 var(--serif); letter-spacing:.14em; margin:0 0 14px; display:flex; gap:12px; align-items:baseline }
+h2 i { color:var(--red); font:600 14px var(--mono); font-style:normal }
+h3 { font:600 12px var(--mono); letter-spacing:.12em; color:var(--mute); text-transform:uppercase; margin:18px 0 6px }
+.meta { color:var(--low); font-size:12.5px }
+
+.btn { display:inline-block; margin:4px 0 12px; padding:12px 20px; background:var(--chitin); border:1px solid var(--red); color:var(--bone);
+  font:600 14px var(--mono); letter-spacing:.06em; text-decoration:none; max-width:100%; overflow-wrap:anywhere }
+.btn:hover { background:var(--red); color:var(--bone) }
+
+.fig { margin:18px 0 0 }
+.fig img { display:block; width:100%; height:auto; border:1px solid var(--hair); background:#000 }
+figcaption { font-size:11px; color:var(--low); letter-spacing:.08em; margin:8px 0 0 }
+
+.links { list-style:none; padding:0; margin:0 }
+.links li { margin:6px 0; padding-left:0; max-width:none }
+.links li::marker { content:"" }
+.links span { color:var(--low); display:inline-block; min-width:110px }
+
+.legal { border:1px solid var(--hair); background:var(--chitin); padding:14px 16px; margin:0 0 14px; max-width:none; color:var(--bone) }
+.credits { font-size:12.5px; color:var(--mute) }
+
+footer { margin-top:30px; padding-top:14px; border-top:1px solid var(--ash); font-size:11px; color:var(--low); letter-spacing:.08em }
+
+@media (max-width: 520px) {
+  body { font-size:13px }
+  main { padding-top:16px }
+  h2 { font-size:16px }
+  .btn { display:block; text-align:center }
+  .links span { display:block; min-width:0 }
+}
+</style>
+<style>
+.title { font:700 clamp(34px, 9vw, 64px)/1 var(--serif); letter-spacing:.12em; margin:18px 0 0; color:var(--bone) }
+.title b { color:var(--red); font-weight:700 }
+.nav { display:flex; flex-wrap:wrap; gap:6px 18px; margin:14px 0 0; font-size:12.5px }
+.nav a { color:var(--mute) }
+.step { display:flex; gap:12px; margin:0 0 14px }
+.step > b { color:var(--red); font:600 13px var(--mono); min-width:22px }
+.step > div { flex:1; min-width:0 }
+.state { color:var(--low); font-size:12px; letter-spacing:.06em }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="title">ORPHEUS<b>-741</b></h1>
+  <p class="tagline">a player for listening, not mixing. early beta.</p>
+  <nav class="nav"><a href="#download">download</a><a href="#what">what it does</a><a href="#help">help</a></nav>
+</header>
+
+<section id="download">
+  <h2><i>◆</i> DOWNLOAD</h2>
+  <p><a class="btn" href="https://github.com/Slayer7411/Orpheus-releases/releases/tag/latest-build">download ORPHEUS</a></p>
+  <p class="meta">mac: .dmg · windows: .exe · linux: .AppImage / .deb · <a href="https://github.com/Slayer7411/Orpheus-releases/releases">all releases</a>. on a mac it also installs and updates from <a href="https://slayer7411.github.io/HELIOS-741-releases/">HELIOS</a>.</p>
+  <h3>first start</h3>
+  <p>if macos blocks the first start: system settings -&gt; privacy &amp; security -&gt; OPEN ANYWAY.</p>
+  <p class="state">early beta: not needed for the dj part, still growing.</p>
+</section>
+
+<section id="what">
+  <h2><i>◆</i> WHAT IT DOES</h2>
+  <ul>
+    <li>local files and your streaming accounts in one ui: google drive, spotify, apple music, soundcloud, tidal</li>
+    <li>one queue, mixed playlists across all sources, history</li>
+    <li>move playlists between services: matched by isrc, then by title, you confirm unsure matches</li>
+    <li>airplay and sonos output</li>
+    <li>reads the 741 library: waveforms, cues and grids like in MINOS</li>
+  </ul>
+  <p class="meta">streaming needs your own account at each service.</p>
+</section>
+
+<section id="suite">
+  <h2><i>◆</i> THE 741 TOOLS</h2>
+  <ul class="links">
+    <li><span>HELIOS</span> <a href="https://slayer7411.github.io/HELIOS-741-releases/">installer, updater, library setup</a></li>
+    <li><span>MINOS</span> <a href="https://slayer7411.github.io/MINOS-741-releases/">dj software</a></li>
+    <li><span>STYX</span> <a href="https://slayer7411.github.io/STYX-741-releases/">digging</a></li>
+    <li><span>ORPHEUS</span> <a href="https://slayer7411.github.io/Orpheus-releases/">player for listening</a></li>
+  </ul>
+</section>
+
+<section id="help">
+  <h2><i>◆</i> HELP</h2>
+  <ul class="links">
+    <li><span>bugs and ideas</span> <a href="https://github.com/Slayer7411/Orpheus-releases/issues">github issues</a></li>
+  </ul>
+  <p class="meta">this repository holds builds and update feeds only.</p>
+</section>
+
+<footer>made by 741 &middot; &copy; 2026 Slayer7411</footer>
+</main>
+</body>
+</html>
